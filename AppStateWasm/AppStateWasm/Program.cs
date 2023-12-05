@@ -1,11 +1,14 @@
 using AppStateWasm.Client.Pages;
 using AppStateWasm.Components;
+using Blazored.LocalStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddBlazoredLocalStorage();
 
 var app = builder.Build();
 
