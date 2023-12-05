@@ -648,7 +648,7 @@ Press F5 and press the **Update Message** button. You can also update the counte
 
 ![image-20231205135503596](images/image-20231205135503596.png)
 
-Close the app right after making a change, and then run it again within 20 seconds. The AppState will load from LocalStorage:
+Close the app right after making a change, and then run it again within 30 seconds. The AppState will load from LocalStorage:
 
 ![image-20231205135503596](images/image-20231205135503596.png)
 
