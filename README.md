@@ -271,7 +271,7 @@ So far we have handled the situation where multiple components that access AppSt
 
 What if a component needs to take action when a property value changes? For example, the Toolbar might want to send a message, make an API call, or the like. 
 
-One option is just to handle this inside the *CascadingAppState.razor* components' property setters. However, we may not want to give the AppState component such power over the application. In general, we should adhere to the [Single Responsibility Principle](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles).
+One option is just to handle this inside the *CascadingAppState.razor* component's property setters. However, we may not want to give the AppState component such power over the application. In general, we should adhere to the [Single Responsibility Principle](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles).
 
 In this case, we want to create a pub/sub mechanism by which each component/page can be notified when a property changes.
 
