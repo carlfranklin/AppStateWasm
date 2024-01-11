@@ -192,39 +192,43 @@ Now we can refer to `AppState` and it's properties anywhere in the component. Th
 #### Modify Pages\Home.razor
 
 ```c#
-@page "/"
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
 
-<PageTitle>Home</PageTitle>
+@code {
 
-<p>
-    This is a demonstration of how to use a Cascading Parameter to share state between components
-    in a .NET Blazor Web App using InteractiveWebAssembly mode.
-</p>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
-<button disabled="@uiDisabled" class="btn btn-primary" @onclick="UpdateMessageButtonClicked">Update Message</button>
-<br />
-<br />
-<h3>@AppState.Message</h3>
-
-@code
-{
-    [CascadingParameter]
-    public CascadingAppState AppState { get; set; }
-
-    bool uiDisabled = true;
-
-    protected override void OnAfterRender(bool firstRender)
+    /// <summary>
+    /// Implement property handlers like so
+    /// </summary>
+    private string message = "";
+    public string Message
     {
-        if (firstRender)
+        get => message;
+        set
         {
-            uiDisabled = false;
+            message = value;
+            StateHasChanged();  // Optionally force a re-render
+        }
+    }
+
+    private int count = 0;
+    public int Count
+    {
+        get => count;
+        set
+        {
+            count = value;
             StateHasChanged();
         }
     }
 
-    void UpdateMessageButtonClicked()
+    protected override void OnInitialized()
     {
-        AppState.Message = $"Message Updated At {DateTime.Now.ToLongTimeString()}";
+        Message = "Initial Message";
     }
 }
 ```
@@ -399,6 +403,12 @@ In this example, we will also implement a time window, after which we will NOT r
 We will need access to LocalStorage. For this we will use Chris Sainty's `Blazored.LocalStorage` pagckage.
 
 Add the following package reference to both the server and client projects:
+
+```
+Install-Package Blazored.LocalStorage
+```
+
+or
 
 ```xml
 <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
