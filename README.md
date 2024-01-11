@@ -192,43 +192,28 @@ Now we can refer to `AppState` and it's properties anywhere in the component. Th
 #### Modify Pages\Home.razor
 
 ```c#
-<CascadingValue Value="this">
-    @ChildContent
-</CascadingValue>
+@page "/"
 
-@code {
+<PageTitle>Home</PageTitle>
 
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+<p>
+    This is a demonstration of how to use a Cascading Parameter to share state between components
+    in a .NET Blazor Web App using InteractiveWebAssembly mode.
+</p>
 
-    /// <summary>
-    /// Implement property handlers like so
-    /// </summary>
-    private string message = "";
-    public string Message
+<button class="btn btn-primary" @onclick="UpdateMessageButtonClicked">Update Message</button>
+<br />
+<br />
+<h3>@AppState.Message</h3>
+
+@code
+{
+    [CascadingParameter]
+    public CascadingAppState AppState { get; set; }
+
+    void UpdateMessageButtonClicked()
     {
-        get => message;
-        set
-        {
-            message = value;
-            StateHasChanged();  // Optionally force a re-render
-        }
-    }
-
-    private int count = 0;
-    public int Count
-    {
-        get => count;
-        set
-        {
-            count = value;
-            StateHasChanged();
-        }
-    }
-
-    protected override void OnInitialized()
-    {
-        Message = "Initial Message";
+        AppState.Message = $"Message Updated At {DateTime.Now.ToLongTimeString()}";
     }
 }
 ```
