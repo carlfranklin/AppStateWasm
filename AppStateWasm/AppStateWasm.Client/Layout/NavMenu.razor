@@ -28,3 +28,18 @@
     </nav>
 </div>
 
+@code {
+
+    [CascadingParameter]
+    public CascadingAppState AppState { get; set; }
+
+    protected override void OnInitialized()
+    {
+        AppState.RegisterCallback(EventCallback.Factory.Create<StatePropertyChangedArgs>(this, HandlePropertyChanged));
+    }
+
+    private void HandlePropertyChanged(StatePropertyChangedArgs args)
+    {
+        // Now the toolbar can be notified when any AppState property changes, and retrieve the new value
+    }
+}
