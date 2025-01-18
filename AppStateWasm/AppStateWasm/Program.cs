@@ -1,4 +1,3 @@
-using AppStateWasm.Client.Pages;
 using AppStateWasm.Components;
 using Blazored.LocalStorage;
 
@@ -7,9 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
-
 builder.Services.AddBlazoredLocalStorage();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,6 +28,6 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(Counter).Assembly);
+    .AddAdditionalAssemblies(typeof(AppStateWasm.Client._Imports).Assembly);
 
 app.Run();
