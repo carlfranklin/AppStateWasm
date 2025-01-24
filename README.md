@@ -6,6 +6,8 @@
 >
 > - https://github.com/carlfranklin/AppStateServer (Server)
 > - https://github.com/carlfranklin/AppStateAuto (Auto)
+>
+> Watch the [BlazorTrain](https://blazortrain.com/) YouTube video [here](https://youtu.be/6oTTPM76-s8)
 
 ### What is Application State?
 
